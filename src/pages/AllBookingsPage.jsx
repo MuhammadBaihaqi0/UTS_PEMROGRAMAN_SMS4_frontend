@@ -2,23 +2,23 @@ import React, { useEffect, useState } from 'react'
 import { bookingService } from '../services/bookingService.js'
 import BookingTable from '../components/organisms/BookingTable.jsx'
 import { SearchBar, FilterSelect } from '../components/molecules/index.jsx'
-import { Button, IconRefresh } from '../components/atoms/index.jsx'
+import { Button, IconRefresh, IconAlert } from '../components/atoms/index.jsx'
 
 const STATUS_OPTIONS = [
   { value: '', label: 'Semua Status' },
-  { value: 'pending',   label: '⏳ Pending'   },
-  { value: 'confirmed', label: '✅ Confirmed' },
-  { value: 'completed', label: '🏆 Completed' },
-  { value: 'cancelled', label: '❌ Cancelled' },
+  { value: 'pending',   label: 'Pending'   },
+  { value: 'confirmed', label: 'Confirmed' },
+  { value: 'completed', label: 'Completed' },
+  { value: 'cancelled', label: 'Cancelled' },
 ]
 
 const SPORT_OPTIONS = [
   { value: '', label: 'Semua Olahraga' },
-  { value: 'Badminton', label: '🏸 Badminton' },
-  { value: 'Futsal',    label: '⚽ Futsal'    },
-  { value: 'Basket',    label: '🏀 Basket'    },
-  { value: 'Tenis',     label: '🎾 Tenis'     },
-  { value: 'Voli',      label: '🏐 Voli'      },
+  { value: 'Badminton', label: 'Badminton' },
+  { value: 'Futsal',    label: 'Futsal'    },
+  { value: 'Basket',    label: 'Basket'    },
+  { value: 'Tenis',     label: 'Tenis'     },
+  { value: 'Voli',      label: 'Voli'      },
 ]
 
 export default function AllBookingsPage() {
@@ -75,7 +75,7 @@ export default function AllBookingsPage() {
             WebkitTextFillColor: 'transparent',
             marginBottom: 4,
           }}>
-            Semua Booking 📋
+            Semua Booking
           </h1>
           <p style={{ color: 'var(--color-text-muted)', fontSize: 14 }}>
             Menampilkan <strong style={{ color: '#22d3ee' }}>{filtered.length}</strong> dari {bookings.length} booking
@@ -122,9 +122,9 @@ export default function AllBookingsPage() {
         <div style={{
           background: '#ef444422', border: '1px solid #ef444444',
           borderRadius: 12, padding: '16px 20px', marginBottom: 20,
-          color: '#ef4444', fontSize: 14,
+          color: '#ef4444', fontSize: 14, display: 'flex', alignItems: 'center', gap: 8
         }}>
-          ⚠️ {error}
+          <IconAlert size={20} /> {error}
         </div>
       )}
 

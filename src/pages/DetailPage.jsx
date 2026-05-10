@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { bookingService } from '../services/bookingService.js'
 import Badge from '../components/atoms/Badge.jsx'
-import { Button, Input, Spinner, IconArrowLeft } from '../components/atoms/index.jsx'
+import { Button, Input, Spinner, IconArrowLeft, IconAlert, IconUser, IconMapPin, IconClock, IconFileText, IconSearch } from '../components/atoms/index.jsx'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 
@@ -79,7 +79,7 @@ export default function DetailPage() {
           WebkitTextFillColor: 'transparent',
           marginBottom: 4,
         }}>
-          Cari Booking by ID 🔍
+          Cari Booking by ID
         </h1>
         <p style={{ color: 'var(--color-text-muted)', fontSize: 14 }}>
           Masukkan ID booking untuk melihat detail.
@@ -106,7 +106,7 @@ export default function DetailPage() {
             onClick={() => fetchById()}
             disabled={loading || !searchId}
           >
-            {loading ? '...' : '🔍 Cari'}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><IconSearch size={16} /> Cari</div>
           </Button>
         </div>
         <p style={{ fontSize: 12, color: 'var(--color-text-muted)', marginTop: 10 }}>
@@ -126,9 +126,9 @@ export default function DetailPage() {
         <div style={{
           background: '#ef444418', border: '1px solid #ef444444',
           borderRadius: 12, padding: '20px 24px',
-          color: '#ef4444', fontSize: 14, textAlign: 'center',
+          color: '#ef4444', fontSize: 14, textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8
         }}>
-          ❌ {error}
+          <IconAlert size={20} /> {error}
         </div>
       )}
 
@@ -168,8 +168,8 @@ export default function DetailPage() {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
               {/* Kiri: Data Pemesan */}
               <div>
-                <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 15, marginBottom: 12, color: '#22d3ee' }}>
-                  👤 Data Pemesan
+                <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 15, marginBottom: 12, color: '#22d3ee', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <IconUser size={18} /> Data Pemesan
                 </h3>
                 <InfoRow label="Nama"       value={booking.nama_pemesan} />
                 <InfoRow label="Email"      value={booking.email} accent="#6366f1" />
@@ -178,8 +178,8 @@ export default function DetailPage() {
 
               {/* Kanan: Detail Booking */}
               <div>
-                <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 15, marginBottom: 12, color: '#22d3ee' }}>
-                  🏟️ Detail Lapangan
+                <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 15, marginBottom: 12, color: '#22d3ee', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <IconMapPin size={18} /> Detail Lapangan
                 </h3>
                 <InfoRow label="Nama Lapangan"   value={booking.nama_lapangan} />
                 <InfoRow label="Jenis Olahraga"  value={booking.jenis_olahraga} />
@@ -190,16 +190,16 @@ export default function DetailPage() {
             <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: 24, marginTop: 8 }}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
                 <div>
-                  <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 15, marginBottom: 12, color: '#22d3ee' }}>
-                    ⏰ Waktu & Pembayaran
+                  <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 15, marginBottom: 12, color: '#22d3ee', display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <IconClock size={18} /> Waktu & Pembayaran
                   </h3>
                   <InfoRow label="Jam Mulai"   value={booking.jam_mulai?.slice(0, 5)} />
                   <InfoRow label="Jam Selesai" value={booking.jam_selesai?.slice(0, 5)} />
                   <InfoRow label="Total Harga" value={formatRupiah(booking.total_harga)} accent="#10b981" />
                 </div>
                 <div>
-                  <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 15, marginBottom: 12, color: '#22d3ee' }}>
-                    📝 Informasi Lain
+                  <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 15, marginBottom: 12, color: '#22d3ee', display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <IconFileText size={18} /> Informasi Lain
                   </h3>
                   <InfoRow label="Catatan"    value={booking.catatan || '-'} />
                   <InfoRow label="Dibuat"     value={formatDateTime(booking.created_at)} />

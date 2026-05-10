@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { SearchBar } from '../components/molecules/index.jsx';
-import { Button, IconRefresh } from '../components/atoms/index.jsx';
+import { Button, IconRefresh, IconAlert } from '../components/atoms/index.jsx';
 
 export default function LapanganPage() {
   const [lapangan, setLapangan] = useState([]);
@@ -23,14 +23,14 @@ export default function LapanganPage() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 28 }}>
         <div>
           <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 800, color: '#e2e8f0', marginBottom: 4 }}>
-            Master Lapangan 🏟️
+            Master Lapangan
           </h1>
           <p style={{ color: 'var(--color-text-muted)' }}>Kelola data lapangan yang tersedia.</p>
         </div>
         <Button onClick={fetchData} variant="secondary"><IconRefresh /> Refresh</Button>
       </div>
 
-      {error && <div style={{ color: '#ef4444', marginBottom: 20 }}>⚠️ {error}</div>}
+      {error && <div style={{ color: '#ef4444', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 8 }}><IconAlert size={20} /> {error}</div>}
 
       <div style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 16, padding: '20px' }}>
         {loading ? <p style={{ color: 'var(--color-text-muted)' }}>Loading...</p> : (

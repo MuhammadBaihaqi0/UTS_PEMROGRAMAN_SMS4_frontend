@@ -1,13 +1,21 @@
 import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { Button } from '../atoms/index.jsx'
+
+import { IconFileText } from '../atoms/index.jsx'
 
 // Data Menu Sidebar Baru
 const navItems = [
-  { path: '/dashboard',  icon: '🏠', label: 'Dashboard' },
-  { path: '/lapangan',   icon: '🏟️', label: 'Master Lapangan' },
-  { path: '/jadwal',     icon: '📅', label: 'Jadwal & Ketersediaan' },
-  { path: '/pemesanan',  icon: '📋', label: 'Data Pemesanan' },
-  { path: '/pembayaran', icon: '💳', label: 'Validasi Pembayaran' },
+  { 
+    path: '/dashboard', 
+    icon: <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>, 
+    label: 'Dashboard' 
+  },
+  { 
+    path: '/all', 
+    icon: <IconFileText size={18} />, 
+    label: 'Data Booking' 
+  },
 ]
 
 export default function MainLayout({ children }) {
@@ -37,7 +45,7 @@ export default function MainLayout({ children }) {
             background: 'linear-gradient(135deg, #22d3ee, #6366f1)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-          }}>SportBook</div>
+          }}>Baiboo</div>
           <div style={{ fontSize: 11, color: 'var(--color-text-muted)', marginTop: 2 }}>
             Booking Lapangan Olahraga
           </div>
@@ -76,7 +84,7 @@ export default function MainLayout({ children }) {
                 onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = '#ffffff08' }}
                 onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = 'transparent' }}
               >
-                <span style={{ fontSize: 18 }}>{item.icon}</span>
+                <span style={{ display: 'flex', alignItems: 'center' }}>{item.icon}</span>
                 {item.label}
               </button>
             )
@@ -86,15 +94,22 @@ export default function MainLayout({ children }) {
         {/* Footer */}
         <div style={{ padding: '16px 24px', borderTop: '1px solid var(--color-border)' }}>
           <div style={{ fontSize: 11, color: 'var(--color-text-muted)' }}>
-            TI41264 — Pemrograman III
+            UTS — Pemrograman III
           </div>
-          <div style={{ fontSize: 11, color: '#64748b', marginTop: 2 }}>Webservice 2025/2026</div>
+          <div style={{ fontSize: 11, color: '#64748b', marginTop: 2 }}>Muhammad Baihaqi Siregar</div>
         </div>
       </aside>
 
       {/* ── Main Content ──────────────────────────────── */}
-      <main style={{ marginLeft: 240, flex: 1, padding: '32px', minHeight: '100vh' }}>
-        {children}
+      <main style={{ marginLeft: 240, flex: 1, padding: '32px', minHeight: '100vh', position: 'relative' }}>
+        <div style={{ position: 'absolute', top: 32, right: 32, zIndex: 50 }}>
+          <Button onClick={() => navigate('/')} variant="secondary" style={{ padding: '8px 16px', borderRadius: 6 }}>
+            Halaman Utama
+          </Button>
+        </div>
+        <div style={{ paddingTop: 40 }}>
+          {children}
+        </div>
       </main>
     </div>
   )

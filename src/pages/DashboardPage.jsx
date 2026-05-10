@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { bookingService } from '../services/bookingService.js'
 import { StatCard } from '../components/molecules/index.jsx'
 import { useNavigate } from 'react-router-dom'
+import { IconFileText, IconClock, IconCheckCircle, IconAward, IconCreditCard } from '../components/atoms/index.jsx'
 
 export default function DashboardPage() {
   const [bookings, setBookings] = useState([])
@@ -41,7 +42,7 @@ export default function DashboardPage() {
           WebkitTextFillColor: 'transparent',
           marginBottom: 6,
         }}>
-          Dashboard 🏟️
+          Dashboard
         </h1>
         <p style={{ color: 'var(--color-text-muted)', fontSize: 15 }}>
           Selamat datang di sistem booking lapangan olahraga.
@@ -54,10 +55,10 @@ export default function DashboardPage() {
       ) : (
         <>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 32 }}>
-            <StatCard label="Total Booking"  value={stats.total}     icon="📋" color="#22d3ee" />
-            <StatCard label="Pending"        value={stats.pending}   icon="⏳" color="#f59e0b" />
-            <StatCard label="Confirmed"      value={stats.confirmed} icon="✅" color="#10b981" />
-            <StatCard label="Completed"      value={stats.completed} icon="🏆" color="#6366f1" />
+            <StatCard label="Total Booking"  value={stats.total}     icon={<IconFileText size={24} color="#22d3ee" />} color="#22d3ee" />
+            <StatCard label="Pending"        value={stats.pending}   icon={<IconClock size={24} color="#f59e0b" />} color="#f59e0b" />
+            <StatCard label="Confirmed"      value={stats.confirmed} icon={<IconCheckCircle size={24} color="#10b981" />} color="#10b981" />
+            <StatCard label="Completed"      value={stats.completed} icon={<IconAward size={24} color="#6366f1" />} color="#6366f1" />
           </div>
 
           {/* Revenue Card */}
@@ -77,7 +78,9 @@ export default function DashboardPage() {
                 {formatRupiah(stats.revenue)}
               </div>
             </div>
-            <div style={{ fontSize: 64 }}>💰</div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <IconCreditCard size={56} color="#10b981" />
+            </div>
           </div>
 
           {/* Recent Bookings */}

@@ -56,6 +56,19 @@ export default function BookingModal({ prefill = {}, onClose }) {
       setError('Semua field wajib diisi.');
       return;
     }
+    if (form.nama_pemesan.length < 3) {
+      setError('Nama pemesan minimal 3 karakter.');
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      setError('Format email tidak valid.');
+      return;
+    }
+    if (form.no_telepon.length < 10 || form.no_telepon.length > 15) {
+      setError('No telepon harus antara 10 - 15 karakter.');
+      return;
+    }
     // Calculate price from hours
     const [h1, m1] = form.jam_mulai.split(':').map(Number);
     const [h2, m2] = form.jam_selesai.split(':').map(Number);

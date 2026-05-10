@@ -18,10 +18,10 @@ export default function LandingPage() {
   const [prefill, setPrefill] = useState({});
 
   const topFields = [
-    { id: 1, name: 'Arena Futsal Jakarta', sport: 'Futsal', loc: 'Jakarta Selatan', price: 150000, img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400&auto=format&fit=crop', rating: 9.2, reviews: 124 },
-    { id: 2, name: 'Gor Basket Bandung', sport: 'Basket', loc: 'Bandung', price: 200000, img: 'https://images.unsplash.com/photo-1505666287802-931dc83948e9?q=80&w=400&auto=format&fit=crop', rating: 8.8, reviews: 89 },
-    { id: 3, name: 'Badminton Center SBY', sport: 'Badminton', loc: 'Surabaya', price: 100000, img: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=400&auto=format&fit=crop', rating: 9.5, reviews: 210 },
-    { id: 4, name: 'Tenis Court Bali', sport: 'Tenis', loc: 'Denpasar', price: 250000, img: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=400&auto=format&fit=crop', rating: 9.0, reviews: 56 },
+    { id: 1, name: 'Arena Futsal Bandung', sport: 'Futsal', loc: 'Bandung', price: 150000, img: 'https://whatsnewindonesia.com/sites/default/files/inline-images/Futsal%20Shakti%20Taridi.png' },
+    { id: 2, name: 'Gor Basket Bandung', sport: 'Basket', loc: 'Bandung', price: 200000, img: 'https://images.unsplash.com/photo-1505666287802-931dc83948e9?q=80&w=400&auto=format&fit=crop' },
+    { id: 3, name: 'Badminton Center Bandung', sport: 'Badminton', loc: 'Bandung', price: 100000, img: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=400&auto=format&fit=crop' },
+    { id: 4, name: 'Tenis Court Bandung', sport: 'Tenis', loc: 'Bandung', price: 250000, img: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=400&auto=format&fit=crop' },
   ];
 
   const handleSearch = () => {
@@ -53,13 +53,10 @@ export default function LandingPage() {
           <div style={{
             fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 800, color: 'var(--color-text)',
             letterSpacing: '-0.02em'
-          }}>SportBook</div>
+          }}>Baiboo</div>
         </div>
         
-        <div style={{ display: 'flex', gap: 24, alignItems: 'center', fontWeight: 500, color: 'var(--color-text)', fontSize: 14 }}>
-          <span style={{ cursor: 'pointer', padding: '8px 12px', borderRadius: 8, transition: 'background 0.2s' }} onMouseEnter={e => e.target.style.background = '#f5f7fa'} onMouseLeave={e => e.target.style.background = 'transparent'}>Beranda</span>
-          <span style={{ cursor: 'pointer', padding: '8px 12px', borderRadius: 8, transition: 'background 0.2s' }} onMouseEnter={e => e.target.style.background = '#f5f7fa'} onMouseLeave={e => e.target.style.background = 'transparent'}>Promo</span>
-          <span style={{ cursor: 'pointer', padding: '8px 12px', borderRadius: 8, transition: 'background 0.2s' }} onMouseEnter={e => e.target.style.background = '#f5f7fa'} onMouseLeave={e => e.target.style.background = 'transparent'}>Bantuan</span>
+        <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
           <Button onClick={() => navigate('/dashboard')} variant="secondary" style={{ padding: '8px 16px', borderRadius: 6 }}>
             Dashboard Admin
           </Button>
@@ -157,9 +154,6 @@ export default function LandingPage() {
               <div style={{ padding: 16, display: 'flex', flexDirection: 'column', flex: 1 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
                   <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--color-text)', lineHeight: 1.3 }}>{field.name}</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'var(--color-accent)', color: '#fff', padding: '4px 6px', borderRadius: 6, fontSize: 13, fontWeight: 700 }}>
-                    {field.rating} <IconStar size={12} color="#fff" style={{ fill: '#fff' }} />
-                  </div>
                 </div>
                 
                 <div style={{ fontSize: 13, color: 'var(--color-accent)', display: 'flex', alignItems: 'center', gap: 6, marginBottom: 16 }}>

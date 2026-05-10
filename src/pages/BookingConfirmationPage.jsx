@@ -85,7 +85,7 @@ export default function BookingConfirmationPage() {
             <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#5392f9' }}></div>
           </div>
           <div style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 800, color: 'var(--color-text)', letterSpacing: '-0.02em' }}>
-            SportBook
+            Baiboo
           </div>
         </div>
         <Button variant="secondary" onClick={() => navigate('/')} style={{ padding: '8px 16px' }}>← Kembali ke Beranda</Button>
