@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 const navItems = [
-  { path: '/',       icon: '🏠', label: 'Dashboard'   },
-  { path: '/all',    icon: '📋', label: 'Semua Booking' },
-  { path: '/detail', icon: '🔍', label: 'Cari By ID'  },
+  { path: '/dashboard', icon: '🏠', label: 'Dashboard'   },
+  { path: '/all',       icon: '📋', label: 'Semua Booking' },
+  { path: '/detail',    icon: '🔍', label: 'Cari By ID'  },
 ]
 
 export default function MainLayout({ children }) {
