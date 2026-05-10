@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
+// Data Menu Sidebar Baru
 const navItems = [
-  { path: '/dashboard', icon: '🏠', label: 'Dashboard'   },
-  { path: '/all',       icon: '📋', label: 'Semua Booking' },
-  { path: '/detail',    icon: '🔍', label: 'Cari By ID'  },
+  { path: '/dashboard',  icon: '🏠', label: 'Dashboard' },
+  { path: '/lapangan',   icon: '🏟️', label: 'Master Lapangan' },
+  { path: '/jadwal',     icon: '📅', label: 'Jadwal & Ketersediaan' },
+  { path: '/pemesanan',  icon: '📋', label: 'Data Pemesanan' },
+  { path: '/pembayaran', icon: '💳', label: 'Validasi Pembayaran' },
 ]
 
 export default function MainLayout({ children }) {
