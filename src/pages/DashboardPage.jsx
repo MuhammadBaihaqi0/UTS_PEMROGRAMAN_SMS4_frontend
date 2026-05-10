@@ -106,7 +106,7 @@ export default function DashboardPage() {
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                     padding: '14px 16px',
-                    background: '#0d1526',
+                    background: '#202940',
                     borderRadius: 12,
                     cursor: 'pointer',
                     border: '1px solid transparent',
