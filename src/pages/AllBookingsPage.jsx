@@ -3,14 +3,8 @@ import { bookingService } from '../services/bookingService.js'
 import BookingTable from '../components/organisms/BookingTable.jsx'
 import { SearchBar, FilterSelect } from '../components/molecules/index.jsx'
 import { Button, IconRefresh, IconAlert } from '../components/atoms/index.jsx'
+import BookingModal from '../components/organisms/BookingModal.jsx'
 
-const STATUS_OPTIONS = [
-  { value: '', label: 'Semua Status' },
-  { value: 'pending',   label: 'Pending'   },
-  { value: 'confirmed', label: 'Confirmed' },
-  { value: 'completed', label: 'Completed' },
-  { value: 'cancelled', label: 'Cancelled' },
-]
 
 const SPORT_OPTIONS = [
   { value: '', label: 'Semua Olahraga' },
@@ -27,8 +21,8 @@ export default function AllBookingsPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [search, setSearch] = useState('')
-  const [statusFilter, setStatusFilter] = useState('')
   const [sportFilter, setSportFilter] = useState('')
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const fetchData = () => {
     setLoading(true)
@@ -56,10 +50,9 @@ export default function AllBookingsPage() {
         String(b.id).includes(q)
       )
     }
-    if (statusFilter) result = result.filter(b => b.status === statusFilter)
     if (sportFilter)  result = result.filter(b => b.jenis_olahraga === sportFilter)
     setFiltered(result)
-  }, [search, statusFilter, sportFilter, bookings])
+  }, [search, sportFilter, bookings])
 
   return (
     <div style={{ animation: 'fadeUp 0.4s ease' }}>
@@ -81,9 +74,14 @@ export default function AllBookingsPage() {
             Menampilkan <strong style={{ color: '#22d3ee' }}>{filtered.length}</strong> dari {bookings.length} booking
           </p>
         </div>
-        <Button onClick={fetchData} variant="secondary">
-          <IconRefresh /> Refresh
-        </Button>
+        <div style={{ display: 'flex', gap: 12 }}>
+          <Button onClick={() => setIsModalOpen(true)} style={{ background: '#10b981', color: 'white', borderColor: '#059669' }}>
+            + Tambah Booking
+          </Button>
+          <Button onClick={fetchData} variant="secondary">
+            <IconRefresh /> Refresh
+          </Button>
+        </div>
       </div>
 
       {/* Filters */}
@@ -94,7 +92,7 @@ export default function AllBookingsPage() {
         padding: '20px',
         marginBottom: 20,
         display: 'grid',
-        gridTemplateColumns: '1fr auto auto',
+        gridTemplateColumns: '1fr auto',
         gap: 12,
         alignItems: 'end',
       }}>
@@ -103,12 +101,7 @@ export default function AllBookingsPage() {
           onChange={e => setSearch(e.target.value)}
           placeholder="Cari nama, email, lapangan, atau ID..."
         />
-        <FilterSelect
-          value={statusFilter}
-          onChange={e => setStatusFilter(e.target.value)}
-          options={STATUS_OPTIONS}
-          label="Status"
-        />
+
         <FilterSelect
           value={sportFilter}
           onChange={e => setSportFilter(e.target.value)}
@@ -137,6 +130,15 @@ export default function AllBookingsPage() {
       }}>
         <BookingTable bookings={filtered} loading={loading} />
       </div>
+
+      {isModalOpen && (
+        <BookingModal 
+          onClose={() => {
+            setIsModalOpen(false);
+            fetchData();
+          }} 
+        />
+      )}
     </div>
   )
 }

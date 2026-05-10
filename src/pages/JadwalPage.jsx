@@ -66,7 +66,6 @@ export default function JadwalPage() {
               <tr style={{ borderBottom: '1px solid var(--color-border)', textAlign: 'left' }}>
                 <th style={{ padding: '12px 8px' }}>Tanggal Main</th>
                 <th style={{ padding: '12px 8px' }}>Waktu</th>
-                <th style={{ padding: '12px 8px' }}>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -74,13 +73,10 @@ export default function JadwalPage() {
                 <tr key={idx} style={{ borderBottom: '1px solid var(--color-border)' }}>
                   <td style={{ padding: '12px 8px', fontWeight: 'bold' }}>{j.tanggal_main}</td>
                   <td style={{ padding: '12px 8px' }}>{j.jam_mulai} - {j.jam_selesai}</td>
-                  <td style={{ padding: '12px 8px', color: j.status === 'confirmed' ? '#10b981' : '#f59e0b' }}>
-                    {j.status.toUpperCase()}
-                  </td>
                 </tr>
               )) : (
                 <tr>
-                  <td colSpan="3" style={{ padding: '20px', textAlign: 'center', color: 'var(--color-text-muted)' }}>Belum ada jadwal terbooking.</td>
+                  <td colSpan="2" style={{ padding: '20px', textAlign: 'center', color: 'var(--color-text-muted)' }}>Belum ada jadwal terbooking.</td>
                 </tr>
               )}
             </tbody>

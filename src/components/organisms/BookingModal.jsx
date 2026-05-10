@@ -40,7 +40,6 @@ export default function BookingModal({ prefill = {}, onClose }) {
     jam_mulai: prefill.jamMulai || '',
     jam_selesai: '',
     total_harga: prefill.hargaPerJam || 0,
-    status: 'pending',
     catatan: '',
   });
 
@@ -108,10 +107,6 @@ export default function BookingModal({ prefill = {}, onClose }) {
     setError('');
     setBelumBayarWarning(false);
     try {
-      // Update booking status to confirmed
-      if (createdBooking?.id) {
-        await axios.put(`${API}/bookings/${createdBooking.id}`, { ...form, status: 'confirmed' });
-      }
       setStep(4);
     } catch (err) {
       setError(err.response?.data?.message || 'Gagal memproses pembayaran.');
@@ -281,7 +276,6 @@ export default function BookingModal({ prefill = {}, onClose }) {
               <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--color-text-muted)', letterSpacing: '0.1em', marginBottom: 2 }}>KODE BOOKING</div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 800, color: 'var(--color-accent)', letterSpacing: '0.05em' }}>{confirmCode}</div>
             </div>
-            <div style={{ padding: '6px 14px', background: '#d1fae5', border: '1px solid #10b981', borderRadius: 20, fontSize: 12, fontWeight: 700, color: '#047857' }}>CONFIRMED</div>
           </div>
 
           {/* Info Rows */}

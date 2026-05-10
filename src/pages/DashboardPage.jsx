@@ -18,10 +18,7 @@ export default function DashboardPage() {
 
   const stats = {
     total:     bookings.length,
-    pending:   bookings.filter(b => b.status === 'pending').length,
-    confirmed: bookings.filter(b => b.status === 'confirmed').length,
-    completed: bookings.filter(b => b.status === 'completed').length,
-    revenue:   bookings.filter(b => b.status !== 'cancelled').reduce((s, b) => s + Number(b.total_harga), 0),
+    revenue:   bookings.reduce((s, b) => s + Number(b.total_harga), 0),
   }
 
   const recentBookings = [...bookings].slice(0, 5)
@@ -56,9 +53,6 @@ export default function DashboardPage() {
         <>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 32 }}>
             <StatCard label="Total Booking"  value={stats.total}     icon={<IconFileText size={24} color="#22d3ee" />} color="#22d3ee" />
-            <StatCard label="Pending"        value={stats.pending}   icon={<IconClock size={24} color="#f59e0b" />} color="#f59e0b" />
-            <StatCard label="Confirmed"      value={stats.confirmed} icon={<IconCheckCircle size={24} color="#10b981" />} color="#10b981" />
-            <StatCard label="Completed"      value={stats.completed} icon={<IconAward size={24} color="#6366f1" />} color="#6366f1" />
           </div>
 
           {/* Revenue Card */}
@@ -137,11 +131,6 @@ export default function DashboardPage() {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <span style={{ fontWeight: 700, color: '#10b981', fontSize: 14 }}>{formatRupiah(b.total_harga)}</span>
-                    <span style={{
-                      padding: '4px 10px', borderRadius: 6, fontSize: 11, fontWeight: 700,
-                      background: b.status === 'confirmed' ? '#10b98122' : b.status === 'pending' ? '#f59e0b22' : b.status === 'cancelled' ? '#ef444422' : '#6366f122',
-                      color: b.status === 'confirmed' ? '#10b981' : b.status === 'pending' ? '#f59e0b' : b.status === 'cancelled' ? '#ef4444' : '#6366f1',
-                    }}>{b.status}</span>
                   </div>
                 </div>
               ))}

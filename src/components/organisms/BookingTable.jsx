@@ -69,7 +69,6 @@ export default function BookingTable({ bookings, loading }) {
             <th style={thStyle}>Tanggal Main</th>
             <th style={thStyle}>Waktu</th>
             <th style={thStyle}>Total Harga</th>
-            <th style={thStyle}>Status</th>
             <th style={thStyle}>Dibuat</th>
             <th style={{ ...thStyle, textAlign: 'center' }}>Aksi</th>
           </tr>
@@ -107,7 +106,6 @@ export default function BookingTable({ bookings, loading }) {
               <td style={{ ...tdStyle, fontWeight: 700, color: '#10b981' }}>
                 {formatRupiah(b.total_harga)}
               </td>
-              <td style={tdStyle}><Badge status={b.status} /></td>
               <td style={{ ...tdStyle, fontSize: 12, color: 'var(--color-text-muted)' }}>
                 {formatDate(b.created_at)}
               </td>

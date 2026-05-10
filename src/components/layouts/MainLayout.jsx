@@ -47,7 +47,7 @@ export default function MainLayout({ children }) {
             WebkitTextFillColor: 'transparent',
           }}>Baiboo</div>
           <div style={{ fontSize: 11, color: 'var(--color-text-muted)', marginTop: 2 }}>
-            Booking Lapangan Olahraga
+            Baihaqi Booking
           </div>
         </div>
 

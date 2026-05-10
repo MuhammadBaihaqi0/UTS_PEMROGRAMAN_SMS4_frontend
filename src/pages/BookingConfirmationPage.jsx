@@ -36,12 +36,7 @@ export default function BookingConfirmationPage() {
   );
 
   const confirmCode = `SB-${String(booking.id).padStart(6, '0')}`;
-  const statusColor = {
-    confirmed: { bg: '#d1fae5', border: '#10b981', text: '#047857' },
-    pending:   { bg: '#fef3c7', border: '#f59e0b', text: '#b45309' },
-    completed: { bg: '#e0e7ff', border: '#6366f1', text: '#4338ca' },
-    cancelled: { bg: '#fee2e2', border: '#ef4444', text: '#b91c1c' },
-  }[booking.status] || { bg: '#f1f5f9', border: '#94a3b8', text: '#475569' };
+
 
   const infoSections = [
     {
@@ -113,10 +108,6 @@ export default function BookingConfirmationPage() {
               <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--color-text-muted)', letterSpacing: '0.12em', marginBottom: 4 }}>KODE BOOKING</div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 800, color: 'var(--color-accent)', letterSpacing: '0.06em' }}>{confirmCode}</div>
             </div>
-            <div style={{
-              padding: '8px 18px', background: statusColor.bg, border: `1px solid ${statusColor.border}`,
-              borderRadius: 24, fontSize: 13, fontWeight: 700, color: statusColor.text, textTransform: 'uppercase',
-            }}>{booking.status}</div>
           </div>
 
           {/* Info Sections */}

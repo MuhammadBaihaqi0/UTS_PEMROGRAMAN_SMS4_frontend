@@ -72,3 +72,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 .fade-up { animation: fadeUp 0.5s ease forwards; }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white !important; }
+}

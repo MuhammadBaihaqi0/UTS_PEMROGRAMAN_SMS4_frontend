@@ -93,7 +93,10 @@ export default function LandingPage() {
             {tabs.map(tab => (
               <button
                 key={tab}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => {
+                  setActiveTab(tab)
+                  setSearchName(tab === 'Semua' ? '' : tab)
+                }}
                 style={{
                   padding: '8px 24px', borderRadius: 20, cursor: 'pointer',
                   fontWeight: 600, fontSize: 14, fontFamily: 'var(--font-body)',

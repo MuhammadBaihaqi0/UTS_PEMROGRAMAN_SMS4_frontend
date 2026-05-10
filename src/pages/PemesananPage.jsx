@@ -40,7 +40,6 @@ export default function PemesananPage() {
                 <th style={{ padding: '12px 8px' }}>Pemesan</th>
                 <th style={{ padding: '12px 8px' }}>Tanggal Main</th>
                 <th style={{ padding: '12px 8px' }}>Waktu</th>
-                <th style={{ padding: '12px 8px' }}>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -50,19 +49,10 @@ export default function PemesananPage() {
                   <td style={{ padding: '12px 8px', fontWeight: 'bold' }}>{p.nama_pemesan}</td>
                   <td style={{ padding: '12px 8px' }}>{p.tanggal_main}</td>
                   <td style={{ padding: '12px 8px' }}>{p.jam_mulai} - {p.jam_selesai}</td>
-                  <td style={{ padding: '12px 8px' }}>
-                    <span style={{ 
-                      padding: '4px 12px', borderRadius: 20, fontSize: 12, fontWeight: 'bold',
-                      background: p.status === 'confirmed' ? '#10b98122' : '#f59e0b22',
-                      color: p.status === 'confirmed' ? '#10b981' : '#f59e0b'
-                    }}>
-                      {p.status.toUpperCase()}
-                    </span>
-                  </td>
                 </tr>
               )) : (
                 <tr>
-                  <td colSpan="5" style={{ padding: '20px', textAlign: 'center', color: 'var(--color-text-muted)' }}>Belum ada data pemesanan.</td>
+                  <td colSpan="4" style={{ padding: '20px', textAlign: 'center', color: 'var(--color-text-muted)' }}>Belum ada data pemesanan.</td>
                 </tr>
               )}
             </tbody>
