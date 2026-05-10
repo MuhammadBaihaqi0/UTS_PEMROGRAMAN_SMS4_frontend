@@ -1,37 +1,66 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Input, IconSearch } from '../components/atoms/index.jsx';
+import { Button, Input, IconMapPin, IconStar } from '../components/atoms/index.jsx';
+import BookingModal from '../components/organisms/BookingModal.jsx';
 
 export default function LandingPage() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('Semua');
   const tabs = ['Semua', 'Futsal', 'Basket', 'Badminton', 'Tenis'];
 
+  // State untuk search widget
+  const [searchName, setSearchName] = useState('');
+  const [searchDate, setSearchDate] = useState('');
+  const [searchTime, setSearchTime] = useState('');
+
+  // State untuk modal booking
+  const [showModal, setShowModal] = useState(false);
+  const [prefill, setPrefill] = useState({});
+
   const topFields = [
-    { id: 1, name: 'Arena Futsal Jakarta', loc: 'Jakarta Selatan', img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400&auto=format&fit=crop' },
-    { id: 2, name: 'Gor Basket Bandung', loc: 'Bandung', img: 'https://images.unsplash.com/photo-1505666287802-931dc83948e9?q=80&w=400&auto=format&fit=crop' },
-    { id: 3, name: 'Badminton Center SBY', loc: 'Surabaya', img: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=400&auto=format&fit=crop' },
-    { id: 4, name: 'Tenis Court Bali', loc: 'Denpasar', img: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=400&auto=format&fit=crop' },
+    { id: 1, name: 'Arena Futsal Jakarta', sport: 'Futsal', loc: 'Jakarta Selatan', price: 150000, img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400&auto=format&fit=crop', rating: 9.2, reviews: 124 },
+    { id: 2, name: 'Gor Basket Bandung', sport: 'Basket', loc: 'Bandung', price: 200000, img: 'https://images.unsplash.com/photo-1505666287802-931dc83948e9?q=80&w=400&auto=format&fit=crop', rating: 8.8, reviews: 89 },
+    { id: 3, name: 'Badminton Center SBY', sport: 'Badminton', loc: 'Surabaya', price: 100000, img: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=400&auto=format&fit=crop', rating: 9.5, reviews: 210 },
+    { id: 4, name: 'Tenis Court Bali', sport: 'Tenis', loc: 'Denpasar', price: 250000, img: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=400&auto=format&fit=crop', rating: 9.0, reviews: 56 },
   ];
+
+  const handleSearch = () => {
+    setPrefill({ namaLapangan: searchName, tanggalMain: searchDate, jamMulai: searchTime, jenisOlahraga: activeTab === 'Semua' ? '' : activeTab });
+    setShowModal(true);
+  };
+
+  const handleCardClick = (field) => {
+    setPrefill({ namaLapangan: field.name, jenisOlahraga: field.sport, hargaPerJam: field.price });
+    setShowModal(true);
+  };
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--color-bg)', fontFamily: 'var(--font-body)' }}>
       {/* ── Navbar ──────────────────────────────────────── */}
       <nav style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        padding: '20px 40px', background: 'var(--color-surface)', borderBottom: '1px solid var(--color-border)',
-        position: 'sticky', top: 0, zIndex: 50
+        padding: '16px 40px', background: '#fff', borderBottom: '1px solid var(--color-border)',
+        position: 'sticky', top: 0, zIndex: 50, boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
       }}>
-        <div style={{
-          fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 800,
-          background: 'linear-gradient(135deg, #22d3ee, #6366f1)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-        }}>SportBook</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          {/* Agoda-like colorful dots */}
+          <div style={{ display: 'flex', gap: 4 }}>
+            <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#ff567d' }}></div>
+            <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#ffb300' }}></div>
+            <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#00c389' }}></div>
+            <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#5392f9' }}></div>
+          </div>
+          <div style={{
+            fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 800, color: 'var(--color-text)',
+            letterSpacing: '-0.02em'
+          }}>SportBook</div>
+        </div>
         
-        <div style={{ display: 'flex', gap: 24, alignItems: 'center', fontWeight: 600, color: 'var(--color-text)' }}>
-          <span style={{ cursor: 'pointer' }}>Beranda</span>
-          <span style={{ cursor: 'pointer' }}>Promo</span>
-          <span style={{ cursor: 'pointer' }}>Bantuan</span>
-          <Button onClick={() => navigate('/dashboard')} variant="secondary" style={{ padding: '8px 16px' }}>
+        <div style={{ display: 'flex', gap: 24, alignItems: 'center', fontWeight: 500, color: 'var(--color-text)', fontSize: 14 }}>
+          <span style={{ cursor: 'pointer', padding: '8px 12px', borderRadius: 8, transition: 'background 0.2s' }} onMouseEnter={e => e.target.style.background = '#f5f7fa'} onMouseLeave={e => e.target.style.background = 'transparent'}>Beranda</span>
+          <span style={{ cursor: 'pointer', padding: '8px 12px', borderRadius: 8, transition: 'background 0.2s' }} onMouseEnter={e => e.target.style.background = '#f5f7fa'} onMouseLeave={e => e.target.style.background = 'transparent'}>Promo</span>
+          <span style={{ cursor: 'pointer', padding: '8px 12px', borderRadius: 8, transition: 'background 0.2s' }} onMouseEnter={e => e.target.style.background = '#f5f7fa'} onMouseLeave={e => e.target.style.background = 'transparent'}>Bantuan</span>
+          <Button onClick={() => navigate('/dashboard')} variant="secondary" style={{ padding: '8px 16px', borderRadius: 6 }}>
             Dashboard Admin
           </Button>
         </div>
@@ -40,55 +69,61 @@ export default function LandingPage() {
       {/* ── Hero Section & Search Widget ────────────────── */}
       <div style={{
         position: 'relative',
-        height: '60vh',
+        height: '55vh',
         minHeight: '450px',
-        backgroundImage: 'linear-gradient(to bottom, rgba(10, 15, 30, 0.3), var(--color-bg)), url("https://images.unsplash.com/photo-1459865264687-595d652de67e?q=80&w=1920&auto=format&fit=crop")',
+        backgroundImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url("https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1920&auto=format&fit=crop")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
       }}>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 42, fontWeight: 800, color: '#fff', marginBottom: 30, textShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
-          TEMUKAN LAPANGAN TERBAIK UNTUKMU
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 42, fontWeight: 800, color: '#fff', marginBottom: 30, textShadow: '0 2px 10px rgba(0,0,0,0.3)', textAlign: 'center' }}>
+          Temukan dan Booking Lapangan Olahraga
         </h1>
 
         {/* Floating Search Widget (Mirip Agoda) */}
         <div style={{
-          background: 'var(--color-surface)',
-          padding: '8px',
-          borderRadius: 'var(--radius-lg)',
-          boxShadow: 'var(--shadow-card)',
+          background: '#fff',
+          padding: '24px',
+          borderRadius: 16,
+          boxShadow: 'var(--shadow-widget)',
           width: '90%',
-          maxWidth: '900px',
+          maxWidth: '1000px',
           border: '1px solid var(--color-border)',
           animation: 'fadeUp 0.6s ease'
         }}>
           {/* Tabs */}
-          <div style={{ display: 'flex', gap: 8, padding: '10px 16px', borderBottom: '1px solid var(--color-border)', marginBottom: 16 }}>
+          <div style={{ display: 'flex', gap: 12, marginBottom: 20, overflowX: 'auto', paddingBottom: 4 }}>
             {tabs.map(tab => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 style={{
-                  padding: '8px 20px', borderRadius: 30, border: 'none', cursor: 'pointer',
+                  padding: '8px 24px', borderRadius: 20, cursor: 'pointer',
                   fontWeight: 600, fontSize: 14, fontFamily: 'var(--font-body)',
-                  background: activeTab === tab ? '#22d3ee22' : 'transparent',
-                  color: activeTab === tab ? '#22d3ee' : 'var(--color-text-muted)',
-                  border: activeTab === tab ? '1px solid #22d3ee44' : '1px solid transparent',
-                  transition: 'all 0.2s'
+                  background: activeTab === tab ? '#e8f0fe' : '#f5f7fa',
+                  color: activeTab === tab ? 'var(--color-accent)' : 'var(--color-text-muted)',
+                  border: activeTab === tab ? '1px solid var(--color-accent)' : '1px solid var(--color-border)',
+                  transition: 'all 0.2s', whiteSpace: 'nowrap'
                 }}
               >{tab}</button>
             ))}
           </div>
 
           {/* Search Inputs */}
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr auto', gap: 12, padding: '0 16px 16px' }}>
-            <div style={{ position: 'relative' }}>
-              <Input placeholder="Cari nama lapangan atau lokasi..." style={{ paddingLeft: 40, height: '100%' }} />
-              <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#64748b' }}>📍</span>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+            <div style={{ position: 'relative', flex: '1 1 250px', minHeight: 56 }}>
+              <Input placeholder="Cari nama lapangan atau lokasi..." value={searchName} onChange={e => setSearchName(e.target.value)} style={{ paddingLeft: 44, height: '100%', fontSize: 16 }} />
+              <span style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', display: 'flex' }}>
+                <IconMapPin size={20} color="var(--color-text-dim)" />
+              </span>
             </div>
-            <Input type="date" style={{ height: '100%' }} />
-            <Input type="time" style={{ height: '100%' }} />
-            <Button style={{ height: '100%', padding: '0 32px', fontSize: 16 }}>
+            <div style={{ position: 'relative', flex: '1 1 140px', minHeight: 56 }}>
+              <Input type="date" value={searchDate} onChange={e => setSearchDate(e.target.value)} style={{ height: '100%', fontSize: 15 }} />
+            </div>
+            <div style={{ position: 'relative', flex: '1 1 140px', minHeight: 56 }}>
+              <Input type="time" value={searchTime} onChange={e => setSearchTime(e.target.value)} style={{ height: '100%', fontSize: 15 }} />
+            </div>
+            <Button onClick={handleSearch} style={{ minHeight: 56, padding: '0 40px', fontSize: 18, borderRadius: 8, flex: '1 1 100%' }}>
               CARI
             </Button>
           </div>
@@ -97,31 +132,57 @@ export default function LandingPage() {
 
       {/* ── Top Destinations / Lapangan Rekomendasi ─────── */}
       <div className="container" style={{ padding: '60px 24px' }}>
-        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 700, marginBottom: 24 }}>
+        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 700, marginBottom: 24, color: 'var(--color-text)' }}>
           Rekomendasi Lapangan Olahraga
         </h2>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
           {topFields.map(field => (
             <div key={field.id} style={{
-              background: 'var(--color-surface-2)', borderRadius: 'var(--radius-md)', overflow: 'hidden',
+              background: '#fff', borderRadius: 12, overflow: 'hidden',
               cursor: 'pointer', transition: 'transform 0.2s, box-shadow 0.2s',
-              border: '1px solid var(--color-border)'
+              border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-card)',
+              display: 'flex', flexDirection: 'column'
             }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
+            onClick={() => handleCardClick(field)}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 24px rgba(0,0,0,0.12)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'var(--shadow-card)'; }}
             >
-              <img src={field.img} alt={field.name} style={{ width: '100%', height: 180, objectFit: 'cover' }} />
-              <div style={{ padding: 16 }}>
-                <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--color-text)', marginBottom: 4 }}>{field.name}</div>
-                <div style={{ fontSize: 13, color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: 6 }}>
-                  📍 {field.loc}
+              <div style={{ position: 'relative' }}>
+                <img src={field.img} alt={field.name} style={{ width: '100%', height: 200, objectFit: 'cover' }} />
+                <div style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(0,0,0,0.6)', color: '#fff', padding: '4px 8px', borderRadius: 4, fontSize: 12, fontWeight: 600 }}>
+                  {field.sport}
+                </div>
+              </div>
+              <div style={{ padding: 16, display: 'flex', flexDirection: 'column', flex: 1 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--color-text)', lineHeight: 1.3 }}>{field.name}</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'var(--color-accent)', color: '#fff', padding: '4px 6px', borderRadius: 6, fontSize: 13, fontWeight: 700 }}>
+                    {field.rating} <IconStar size={12} color="#fff" style={{ fill: '#fff' }} />
+                  </div>
+                </div>
+                
+                <div style={{ fontSize: 13, color: 'var(--color-accent)', display: 'flex', alignItems: 'center', gap: 6, marginBottom: 16 }}>
+                  <IconMapPin size={14} /> <span style={{ textDecoration: 'underline' }}>{field.loc}</span>
+                </div>
+                
+                <div style={{ marginTop: 'auto', textAlign: 'right' }}>
+                  <div style={{ fontSize: 11, color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Harga Mulai</div>
+                  <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--color-danger)' }}>
+                    Rp {field.price.toLocaleString()}
+                  </div>
+                  <div style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>per jam</div>
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* ── Booking Modal ──────────────────────────────── */}
+      {showModal && (
+        <BookingModal prefill={prefill} onClose={() => setShowModal(false)} />
+      )}
     </div>
   )
 }

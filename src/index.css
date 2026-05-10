@@ -1,28 +1,29 @@
 /* ── Design Tokens ─────────────────────────────── */
 :root {
-  --color-bg:         #0a0f1e;
-  --color-surface:    #111827;
-  --color-surface-2:  #1c2537;
-  --color-border:     #1e2d45;
-  --color-accent:     #22d3ee;
-  --color-accent-2:   #6366f1;
+  --color-bg:         #f5f7fa;
+  --color-surface:    #ffffff;
+  --color-surface-2:  #f8f9fa;
+  --color-border:     #dddde5;
+  --color-accent:     #5392F9; /* Agoda Blue */
+  --color-accent-2:   #ff567d; /* Pink/Red accent */
   --color-success:    #10b981;
   --color-warning:    #f59e0b;
-  --color-danger:     #ef4444;
-  --color-text:       #e2e8f0;
-  --color-text-muted: #64748b;
-  --color-text-dim:   #94a3b8;
+  --color-danger:     #e12d2d; /* Agoda Price Red */
+  --color-text:       #2a2a2c;
+  --color-text-muted: #757575;
+  --color-text-dim:   #a0aec0;
 
-  --font-display: 'Syne', sans-serif;
-  --font-body:    'DM Sans', sans-serif;
+  --font-display: 'Inter', -apple-system, sans-serif;
+  --font-body:    'Inter', -apple-system, sans-serif;
 
-  --radius-sm:  6px;
-  --radius-md:  12px;
-  --radius-lg:  20px;
-  --radius-xl:  32px;
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
 
-  --shadow-glow: 0 0 30px rgba(34, 211, 238, 0.12);
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(83, 146, 249, 0.2);
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-widget: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
 /* ── Reset ─────────────────────────────────────── */
